@@ -1,0 +1,35 @@
+#基础信息配置
+server:
+  port: 9999
+spring:
+  application:
+    name: baby-register-server
+  profiles:
+    active: local
+
+#注册中心
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    leaseExpirationDurationInSeconds: 30
+    leaseRenewalIntervalInSeconds: 10
+    preferIpAddress: true
+    ipAddress: ${spring.cloud.client.ip-address}
+    instanceId: ${spring.cloud.client.ip-address}:${server.port}
+  server:
+    evictionIntervalTimerInMs: 1200000
+    enableSelfPreservation: false #禁用自我保护模式
+  client:
+#    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${spring.cloud.client.ip-address}:${server.port}/eureka/
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+

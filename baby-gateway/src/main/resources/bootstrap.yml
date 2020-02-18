@@ -1,0 +1,61 @@
+server:
+  port: 5000
+
+spring:
+  application:
+    name: baby-gateway
+  cloud:
+    config:
+      discovery:
+          enabled: true                                 # 默认false，设为true表示使用注册中心中的configserver配置而不自己配置configserver的uri
+          serviceId: baby-config-server
+      profile: local
+  zipkin:
+    base-url: http://baby-trace-server  #可以配置具体的地址http://localhost:9411，也可以配置service_id
+  sleuth:
+    sampler:
+      probability: 1.0
+
+
+
+
+#注册中心
+eureka:
+  client:
+    serviceUrl:
+       defaultZone: http://localhost:9999/eureka/
+  instance:
+      preferIpAddress: true
+      ipAddress: ${spring.cloud.client.ip-address}
+      instanceId: ${spring.cloud.client.ip-address}:${server.port}
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 7000
+
+
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 10000
+
+
+zuul:
+  routes:
+     product-provider:
+         path: /baby-provider/**
+         serviceId: baby-provider
+     product-consumer:
+         path: /baby-consumer/**
+         serviceId: baby-consumer
+

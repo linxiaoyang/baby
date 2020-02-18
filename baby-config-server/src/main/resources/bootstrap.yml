@@ -1,0 +1,36 @@
+server:
+  port: 9998
+spring:
+  application:
+    name: baby-config-server
+  profiles:
+    active: local
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/linxiaoyang/baby-config.git
+          search-paths: /{application}
+          username: #git的用户名
+          password: #git的密码
+
+
+
+
+#注册中心
+eureka:
+  client:
+    serviceUrl:
+       defaultZone: http://localhost:9999/eureka/
+  instance:
+      preferIpAddress: true
+      ipAddress: ${spring.cloud.client.ip-address}
+      instanceId: ${spring.cloud.client.ip-address}:${server.port}
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
