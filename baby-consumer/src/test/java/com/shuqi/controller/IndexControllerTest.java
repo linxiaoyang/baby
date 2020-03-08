@@ -18,4 +18,16 @@ public class IndexControllerTest extends BaseContext {
         System.out.println(userDTOResult);
 
     }
+
+    @Test
+    public void testRibbonQueryByUserId(){
+        Result<UserDTO> userDTOResult = indexController.ribbonQueryByUserId(3L);
+        System.out.println(userDTOResult);
+    }
+
+    @Test
+    public void testHystrixQueryByUserId(){
+        Result<UserDTO> userDTOResult = indexController.hystrixQueryByUserId(3L);
+        System.out.println(userDTOResult);
+    }
 }

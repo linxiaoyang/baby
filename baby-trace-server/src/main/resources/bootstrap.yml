@@ -1,18 +1,10 @@
 server:
   port: 9997
 
-zipkin:
-  storage:
-    type: mysql
+
 spring:
   application:
     name: baby-trace-server
-  datasource:
-    url: jdbc:mysql://localhost:3306/test
-    username: root
-    password: rootroot
-
-
 
 
 #注册中心

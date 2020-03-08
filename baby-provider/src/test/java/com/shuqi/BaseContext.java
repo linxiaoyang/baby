@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = ConsumerApplication.class)
+@SpringBootTest(classes = ProviderApplication.class)
 public class BaseContext {
 
 
